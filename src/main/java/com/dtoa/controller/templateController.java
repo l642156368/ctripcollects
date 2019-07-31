@@ -103,6 +103,11 @@ public class templateController {
         return tte;
     }
 
+    /**
+     * 优化模板进行查询
+     * @param company
+     * @return
+     */
     @RequestMapping(value = "query", method = {RequestMethod.POST})
     private XCtraveltemplate query(@RequestBody String company) {
 
@@ -111,6 +116,12 @@ public class templateController {
         return aa;
     }
 
+    /***
+     *
+     * 模板新增
+     * @param tt
+     * @return
+     */
     @RequestMapping(value = "insert", method = {RequestMethod.POST})
     private int insert(XCtraveltemplate tt) {
         tt.getTempdescribe();
