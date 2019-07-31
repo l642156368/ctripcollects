@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.XCtravelpersonnelMapper">
+    <resultMap id="BaseResultMap" type="com.dtoa.model.XCtravelpersonnel">
+        <result column="approval" property="approval" jdbcType="VARCHAR"/>
+        <result column="pedestrian" property="pedestrian" jdbcType="VARCHAR"/>
+        <result column="pedestrianid" property="pedestrianid" jdbcType="VARCHAR"/>
+        <result column="trekking" property="trekking" jdbcType="VARCHAR"/>
+        <result column="trekkingid" property="trekkingid" jdbcType="VARCHAR"/>
+        <result column="approvers" property="approvers" jdbcType="VARCHAR"/>
+        <result column="approversid" property="approversid" jdbcType="VARCHAR"/>
+        <result column="renews" property="renews" jdbcType="VARCHAR"/>
+        <result column="renewsid" property="renewsid" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        approval, pedestrian, pedestrianid, trekking, trekkingid, approvers, approversid, renews, renewsid
+    </sql>
+    <select id="sel" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT * FROM
+        XC_travel_personnel tpe where tpe.approval = #{approval,jdbcType=VARCHAR}
+    </select>
+
+
+    <delete id="del" parameterType="java.lang.String">
+        delete from XC_travel_personnel
+        where approval = #{approval,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.dtoa.model.XCtravelpersonnel">
+        insert into XC_travel_personnel (approval, pedestrian, pedestrianid,
+        trekking, trekkingid, approvers,
+        approversid, renews, renewsid
+        )
+        values (#{approval,jdbcType=VARCHAR}, #{pedestrian,jdbcType=VARCHAR}, #{pedestrianid,jdbcType=VARCHAR},
+        #{trekking,jdbcType=VARCHAR}, #{trekkingid,jdbcType=VARCHAR}, #{approvers,jdbcType=VARCHAR},
+        #{approversid,jdbcType=VARCHAR}, #{renews,jdbcType=VARCHAR}, #{renewsid,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.dtoa.model.XCtravelpersonnel">
+        insert into XC_travel_personnel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                approval,
+            </if>
+            <if test="pedestrian != null">
+                pedestrian,
+            </if>
+            <if test="pedestrianid != null">
+                pedestrianid,
+            </if>
+            <if test="trekking != null">
+                trekking,
+            </if>
+            <if test="trekkingid != null">
+                trekkingid,
+            </if>
+            <if test="approvers != null">
+                approvers,
+            </if>
+            <if test="approversid != null">
+                approversid,
+            </if>
+            <if test="renews != null">
+                renews,
+            </if>
+            <if test="renewsid != null">
+                renewsid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                #{approval,jdbcType=VARCHAR},
+            </if>
+            <if test="pedestrian != null">
+                #{pedestrian,jdbcType=VARCHAR},
+            </if>
+            <if test="pedestrianid != null">
+                #{pedestrianid,jdbcType=VARCHAR},
+            </if>
+            <if test="trekking != null">
+                #{trekking,jdbcType=VARCHAR},
+            </if>
+            <if test="trekkingid != null">
+                #{trekkingid,jdbcType=VARCHAR},
+            </if>
+            <if test="approvers != null">
+                #{approvers,jdbcType=VARCHAR},
+            </if>
+            <if test="approversid != null">
+                #{approversid,jdbcType=VARCHAR},
+            </if>
+            <if test="renews != null">
+                #{renews,jdbcType=VARCHAR},
+            </if>
+            <if test="renewsid != null">
+                #{renewsid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

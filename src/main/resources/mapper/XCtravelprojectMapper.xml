@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.XCtravelprojectMapper">
+    <resultMap id="BaseResultMap" type="com.dtoa.model.XCtravelproject">
+        <result column="approval" property="approval" jdbcType="VARCHAR"/>
+        <result column="projectname" property="projectname" jdbcType="VARCHAR"/>
+        <result column="prnumber" property="prnumber" jdbcType="VARCHAR"/>
+        <result column="worktype" property="worktype" jdbcType="VARCHAR"/>
+        <result column="market" property="market" jdbcType="VARCHAR"/>
+        <result column="othersales" property="othersales" jdbcType="VARCHAR"/>
+        <result column="sellunit" property="sellunit" jdbcType="VARCHAR"/>
+        <result column="othersalesid" property="othersalesid" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        approval, projectname, prnumber,worktype, market, othersales, sellunit,department,othersalesid
+    </sql>
+    <select id="sel" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT * FROM
+        XC_travel_project tp where tp.approval = #{approval,jdbcType=VARCHAR}
+
+    </select>
+
+    <delete id="del" parameterType="java.lang.String">
+        delete from XC_travel_project
+        where approval = #{approval,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.dtoa.model.XCtravelproject">
+        insert into XC_travel_project (approval, projectname, prnumber,
+        worktype, market, othersales,
+        sellunit,department,othersalesid)
+        values (#{approval,jdbcType=VARCHAR}, #{projectname,jdbcType=VARCHAR}, #{prnumber,jdbcType=VARCHAR},
+        #{worktype,jdbcType=VARCHAR}, #{market,jdbcType=VARCHAR}, #{othersales,jdbcType=VARCHAR},
+        #{sellunit,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{othersalesid,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dtoa.model.XCtravelproject">
+        insert into XC_travel_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                approval,
+            </if>
+            <if test="projectname != null">
+                projectname,
+            </if>
+            <if test="prnumber != null">
+                prnumber,
+            </if>
+            <if test="worktype != null">
+                worktype,
+            </if>
+            <if test="market != null">
+                market,
+            </if>
+            <if test="othersales != null">
+                othersales,
+            </if>
+            <if test="sellunit != null">
+                sellunit,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                #{approval,jdbcType=VARCHAR},
+            </if>
+            <if test="projectname != null">
+                #{projectname,jdbcType=VARCHAR},
+            </if>
+            <if test="prnumber != null">
+                #{prnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="worktype != null">
+                #{worktype,jdbcType=VARCHAR},
+            </if>
+            <if test="market != null">
+                #{market,jdbcType=VARCHAR},
+            </if>
+            <if test="othersales != null">
+                #{othersales,jdbcType=VARCHAR},
+            </if>
+            <if test="sellunit != null">
+                #{sellunit,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

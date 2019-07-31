@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.XCtraveltemplateMapper">
+    <resultMap id="BaseResultMap" type="com.dtoa.model.XCtraveltemplate">
+        <id column="tempid" property="tempid" jdbcType="VARCHAR"/>
+        <result column="tempname" property="tempname" jdbcType="VARCHAR"/>
+        <result column="templateid" property="templateid" jdbcType="VARCHAR"/>
+        <result column="department" property="department" jdbcType="VARCHAR"/>
+        <result column="tempdescribe" property="tempdescribe" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        tempid, tempname, templateid, department, tempdescribe
+    </sql>
+    <select id="querytemp" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from XC_travel_template
+
+    </select>
+
+
+    <select id="queryall" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        templateid
+        from XC_travel_template
+        where tempid = #{tempid,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="query" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from XC_travel_template where
+
+        #{company} LIKE tempdescribe
+
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from XC_travel_template
+        where tempid = #{tempid,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.dtoa.model.XCtraveltemplate">
+        insert into XC_travel_template (tempid, tempname, templateid,
+        department, tempdescribe)
+        values (#{tempid,jdbcType=VARCHAR}, #{tempname,jdbcType=VARCHAR}, #{templateid,jdbcType=VARCHAR},
+        #{department,jdbcType=VARCHAR}, #{tempdescribe,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dtoa.model.XCtraveltemplate">
+        insert into XC_travel_template
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tempid != null">
+                tempid,
+            </if>
+            <if test="tempname != null">
+                tempname,
+            </if>
+            <if test="templateid != null">
+                templateid,
+            </if>
+            <if test="department != null">
+                department,
+            </if>
+            <if test="tempdescribe != null">
+                tempdescribe,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tempid != null">
+                #{tempid,jdbcType=VARCHAR},
+            </if>
+            <if test="tempname != null">
+                #{tempname,jdbcType=VARCHAR},
+            </if>
+            <if test="templateid != null">
+                #{templateid,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null">
+                #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="tempdescribe != null">
+                #{tempdescribe,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dtoa.model.XCtraveltemplate">
+        update XC_travel_template
+        <set>
+            <if test="tempname != null">
+                tempname = #{tempname,jdbcType=VARCHAR},
+            </if>
+            <if test="templateid != null">
+                templateid = #{templateid,jdbcType=VARCHAR},
+            </if>
+            <if test="department != null">
+                department = #{department,jdbcType=VARCHAR},
+            </if>
+            <if test="tempdescribe != null">
+                tempdescribe = #{tempdescribe,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where tempid = #{tempid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dtoa.model.XCtraveltemplate">
+        update XC_travel_template
+        set tempname = #{tempname,jdbcType=VARCHAR},
+        templateid = #{templateid,jdbcType=VARCHAR},
+        department = #{department,jdbcType=VARCHAR},
+        tempdescribe = #{tempdescribe,jdbcType=VARCHAR}
+        where tempid = #{tempid,jdbcType=VARCHAR}
+    </update>
+</mapper>

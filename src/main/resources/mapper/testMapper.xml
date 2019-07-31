@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.testMapper" >
+  <resultMap id="BaseResultMap" type="com.dtoa.model.test" >
+    <result column="a" property="a" jdbcType="VARCHAR" />
+    <result column="b" property="b" jdbcType="VARCHAR" />
+    <result column="c" property="c" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+       a,b,c
+    </sql>
+
+  <select id="query" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from test
+    </select>
+
+
+  <delete id="del" parameterType="java.lang.String">
+        delete from test
+        where a = #{a}
+    </delete>
+
+  <insert id="insert" parameterType="com.dtoa.model.test" >
+    insert into test (a, b, c)
+    values (#{a}, #{b}, #{c})
+  </insert>
+
+
+  <update id="update" parameterType="com.dtoa.model.test">
+        update test
+        set
+        b = #{b},
+        c = #{c}
+        where a = #{a}
+    </update>
+
+
+  <insert id="insertSelective" parameterType="com.dtoa.model.test" >
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="a != null" >
+        a,
+      </if>
+      <if test="b != null" >
+        b,
+      </if>
+      <if test="c != null" >
+        c,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="a != null" >
+        #{a,jdbcType=VARCHAR},
+      </if>
+      <if test="b != null" >
+        #{b,jdbcType=VARCHAR},
+      </if>
+      <if test="c != null" >
+        #{c,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

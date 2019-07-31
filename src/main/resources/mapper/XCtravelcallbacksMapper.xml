@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.XCtravelcallbacksMapper">
+    <resultMap id="BaseResultMap" type="com.dtoa.model.XCtravelcallbacks">
+        <id column="ThirdNo" property="thirdno" jdbcType="VARCHAR"/>
+        <result column="CreateTime" property="createtime" jdbcType="VARCHAR"/>
+        <result column="Event" property="event" jdbcType="VARCHAR"/>
+        <result column="OpenSpStatus" property="openspstatus" jdbcType="VARCHAR"/>
+        <result column="ApplyTime" property="applytime" jdbcType="VARCHAR"/>
+        <result column="ApplyUserName" property="applyusername" jdbcType="VARCHAR"/>
+        <result column="ApplyUserId" property="applyuserid" jdbcType="VARCHAR"/>
+        <result column="ApplyUserParty" property="applyuserparty" jdbcType="VARCHAR"/>
+        <result column="ApplyUserImage" property="applyuserimage" jdbcType="VARCHAR"/>
+        <result column="NodeStatus" property="nodestatus" jdbcType="VARCHAR"/>
+        <result column="ItemName" property="itemname" jdbcType="VARCHAR"/>
+        <result column="ItemUserid" property="itemuserid" jdbcType="VARCHAR"/>
+        <result column="ItemStatus" property="itemstatus" jdbcType="VARCHAR"/>
+        <result column="ItemOpTime" property="itemoptime" jdbcType="VARCHAR"/>
+        <result column="ItemImage" property="itemimage" jdbcType="VARCHAR"/>
+        <result column="NotifyNodes" property="notifynodes" jdbcType="VARCHAR"/>
+        <result column="copyName" property="copyname" jdbcType="VARCHAR"/>
+        <result column="copyUserid" property="copyuserid" jdbcType="VARCHAR"/>
+        <result column="copyImage" property="copyimage" jdbcType="VARCHAR"/>
+        <result column="ItemParty" property="itemparty" jdbcType="VARCHAR"/>
+        <result column="approverstep" property="approverstep" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ThirdNo, CreateTime, Event, OpenSpStatus, ApplyTime, ApplyUserName, ApplyUserId,
+        ApplyUserParty, ApplyUserImage, NodeStatus, ItemName, ItemUserid, ItemStatus, ItemOpTime,
+        ItemImage, NotifyNodes, copyName, copyUserid, copyImage, ItemParty, approverstep
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from XC_travel_callbacks
+        where ThirdNo = #{thirdno,jdbcType=VARCHAR}
+    </select>
+    <select id="query" parameterType="String" resultType="Integer">
+        select
+        COUNT(*) ThirdNo
+        from XC_travel_callbacks
+        where ThirdNo = #{thirdno}
+    </select>
+
+
+    <select id="sel" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        *
+        from XC_travel_callbacks
+        where ThirdNo = #{thirdno}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from XC_travel_callbacks
+        where ThirdNo = #{approval,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.dtoa.model.XCtravelcallbacks">
+        insert into XC_travel_callbacks (ThirdNo, CreateTime, Event,
+        OpenSpStatus, ApplyTime, ApplyUserName,
+        ApplyUserId, ApplyUserParty, ApplyUserImage,
+        NodeStatus, ItemName, ItemUserid,
+        ItemStatus, ItemOpTime, ItemImage,
+        NotifyNodes, copyName, copyUserid,
+        copyImage, ItemParty, approverstep
+        )
+        values (#{thirdno,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, #{event,jdbcType=VARCHAR},
+        #{openspstatus,jdbcType=VARCHAR}, #{applytime,jdbcType=VARCHAR}, #{applyusername,jdbcType=VARCHAR},
+        #{applyuserid,jdbcType=VARCHAR}, #{applyuserparty,jdbcType=VARCHAR}, #{applyuserimage,jdbcType=VARCHAR},
+        #{nodestatus,jdbcType=VARCHAR}, #{itemname,jdbcType=VARCHAR}, #{itemuserid,jdbcType=VARCHAR},
+        #{itemstatus,jdbcType=VARCHAR}, #{itemoptime,jdbcType=VARCHAR}, #{itemimage,jdbcType=VARCHAR},
+        #{notifynodes,jdbcType=VARCHAR}, #{copyname,jdbcType=VARCHAR}, #{copyuserid,jdbcType=VARCHAR},
+        #{copyimage,jdbcType=VARCHAR}, #{itemparty,jdbcType=VARCHAR}, #{approverstep,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.dtoa.model.XCtravelcallbacks">
+        insert into XC_travel_callbacks
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="thirdno != null">
+                ThirdNo,
+            </if>
+            <if test="createtime != null">
+                CreateTime,
+            </if>
+            <if test="event != null">
+                Event,
+            </if>
+            <if test="openspstatus != null">
+                OpenSpStatus,
+            </if>
+            <if test="applytime != null">
+                ApplyTime,
+            </if>
+            <if test="applyusername != null">
+                ApplyUserName,
+            </if>
+            <if test="applyuserid != null">
+                ApplyUserId,
+            </if>
+            <if test="applyuserparty != null">
+                ApplyUserParty,
+            </if>
+            <if test="applyuserimage != null">
+                ApplyUserImage,
+            </if>
+            <if test="nodestatus != null">
+                NodeStatus,
+            </if>
+            <if test="itemname != null">
+                ItemName,
+            </if>
+            <if test="itemuserid != null">
+                ItemUserid,
+            </if>
+            <if test="itemstatus != null">
+                ItemStatus,
+            </if>
+            <if test="itemoptime != null">
+                ItemOpTime,
+            </if>
+            <if test="itemimage != null">
+                ItemImage,
+            </if>
+            <if test="notifynodes != null">
+                NotifyNodes,
+            </if>
+            <if test="copyname != null">
+                copyName,
+            </if>
+            <if test="copyuserid != null">
+                copyUserid,
+            </if>
+            <if test="copyimage != null">
+                copyImage,
+            </if>
+            <if test="itemparty != null">
+                ItemParty,
+            </if>
+            <if test="approverstep != null">
+                approverstep,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="thirdno != null">
+                #{thirdno,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="event != null">
+                #{event,jdbcType=VARCHAR},
+            </if>
+            <if test="openspstatus != null">
+                #{openspstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="applytime != null">
+                #{applytime,jdbcType=VARCHAR},
+            </if>
+            <if test="applyusername != null">
+                #{applyusername,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserid != null">
+                #{applyuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserparty != null">
+                #{applyuserparty,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserimage != null">
+                #{applyuserimage,jdbcType=VARCHAR},
+            </if>
+            <if test="nodestatus != null">
+                #{nodestatus,jdbcType=VARCHAR},
+            </if>
+            <if test="itemname != null">
+                #{itemname,jdbcType=VARCHAR},
+            </if>
+            <if test="itemuserid != null">
+                #{itemuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="itemstatus != null">
+                #{itemstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="itemoptime != null">
+                #{itemoptime,jdbcType=VARCHAR},
+            </if>
+            <if test="itemimage != null">
+                #{itemimage,jdbcType=VARCHAR},
+            </if>
+            <if test="notifynodes != null">
+                #{notifynodes,jdbcType=VARCHAR},
+            </if>
+            <if test="copyname != null">
+                #{copyname,jdbcType=VARCHAR},
+            </if>
+            <if test="copyuserid != null">
+                #{copyuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="copyimage != null">
+                #{copyimage,jdbcType=VARCHAR},
+            </if>
+            <if test="itemparty != null">
+                #{itemparty,jdbcType=VARCHAR},
+            </if>
+            <if test="approverstep != null">
+                #{approverstep,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dtoa.model.XCtravelcallbacks">
+        update XC_travel_callbacks
+        <set>
+            <if test="createtime != null">
+                CreateTime = #{createtime,jdbcType=VARCHAR},
+            </if>
+            <if test="event != null">
+                Event = #{event,jdbcType=VARCHAR},
+            </if>
+            <if test="openspstatus != null">
+                OpenSpStatus = #{openspstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="applytime != null">
+                ApplyTime = #{applytime,jdbcType=VARCHAR},
+            </if>
+            <if test="applyusername != null">
+                ApplyUserName = #{applyusername,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserid != null">
+                ApplyUserId = #{applyuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserparty != null">
+                ApplyUserParty = #{applyuserparty,jdbcType=VARCHAR},
+            </if>
+            <if test="applyuserimage != null">
+                ApplyUserImage = #{applyuserimage,jdbcType=VARCHAR},
+            </if>
+            <if test="nodestatus != null">
+                NodeStatus = #{nodestatus,jdbcType=VARCHAR},
+            </if>
+            <if test="itemname != null">
+                ItemName = #{itemname,jdbcType=VARCHAR},
+            </if>
+            <if test="itemuserid != null">
+                ItemUserid = #{itemuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="itemstatus != null">
+                ItemStatus = #{itemstatus,jdbcType=VARCHAR},
+            </if>
+            <if test="itemoptime != null">
+                ItemOpTime = #{itemoptime,jdbcType=VARCHAR},
+            </if>
+            <if test="itemimage != null">
+                ItemImage = #{itemimage,jdbcType=VARCHAR},
+            </if>
+            <if test="notifynodes != null">
+                NotifyNodes = #{notifynodes,jdbcType=VARCHAR},
+            </if>
+            <if test="copyname != null">
+                copyName = #{copyname,jdbcType=VARCHAR},
+            </if>
+            <if test="copyuserid != null">
+                copyUserid = #{copyuserid,jdbcType=VARCHAR},
+            </if>
+            <if test="copyimage != null">
+                copyImage = #{copyimage,jdbcType=VARCHAR},
+            </if>
+            <if test="itemparty != null">
+                ItemParty = #{itemparty,jdbcType=VARCHAR},
+            </if>
+            <if test="approverstep != null">
+                approverstep = #{approverstep,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ThirdNo = #{thirdno,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dtoa.model.XCtravelcallbacks">
+        update XC_travel_callbacks
+        set CreateTime = #{createtime,jdbcType=VARCHAR},
+        Event = #{event,jdbcType=VARCHAR},
+        OpenSpStatus = #{openspstatus,jdbcType=VARCHAR},
+        ApplyTime = #{applytime,jdbcType=VARCHAR},
+        ApplyUserName = #{applyusername,jdbcType=VARCHAR},
+        ApplyUserId = #{applyuserid,jdbcType=VARCHAR},
+        ApplyUserParty = #{applyuserparty,jdbcType=VARCHAR},
+        ApplyUserImage = #{applyuserimage,jdbcType=VARCHAR},
+        NodeStatus = #{nodestatus,jdbcType=VARCHAR},
+        ItemName = #{itemname,jdbcType=VARCHAR},
+        ItemUserid = #{itemuserid,jdbcType=VARCHAR},
+        ItemStatus = #{itemstatus,jdbcType=VARCHAR},
+        ItemOpTime = #{itemoptime,jdbcType=VARCHAR},
+        ItemImage = #{itemimage,jdbcType=VARCHAR},
+        NotifyNodes = #{notifynodes,jdbcType=VARCHAR},
+        copyName = #{copyname,jdbcType=VARCHAR},
+        copyUserid = #{copyuserid,jdbcType=VARCHAR},
+        copyImage = #{copyimage,jdbcType=VARCHAR},
+        ItemParty = #{itemparty,jdbcType=VARCHAR},
+        approverstep = #{approverstep,jdbcType=VARCHAR}
+        where ThirdNo = #{thirdno,jdbcType=VARCHAR}
+    </update>
+</mapper>

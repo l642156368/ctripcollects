@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dtoa.dao.XCtraveltravelMapper">
+    <resultMap id="BaseResultMap" type="com.dtoa.model.XCtraveltravel">
+        <result column="approval" property="approval" jdbcType="VARCHAR"/>
+        <result column="applyTime" property="applytime" jdbcType="VARCHAR"/>
+        <result column="departure" property="departure" jdbcType="VARCHAR"/>
+        <result column="arrived" property="arrived" jdbcType="VARCHAR"/>
+        <result column="starttime" property="starttime" jdbcType="VARCHAR"/>
+        <result column="endtime" property="endtime" jdbcType="VARCHAR"/>
+        <result column="duration" property="duration" jdbcType="VARCHAR"/>
+        <result column="unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="unitid" property="unitid" jdbcType="VARCHAR"/>
+        <result column="reasons" property="reasons" jdbcType="VARCHAR"/>
+        <result column="vehicles" property="vehicles" jdbcType="VARCHAR"/>
+        <result column="company" property="company" jdbcType="VARCHAR"/>
+        <result column="userid" property="userid" jdbcType="VARCHAR"/>
+        <collection property="XCtravelproject"
+                    ofType="com.dtoa.model.XCtravelproject" column="XCtravelproject">
+            <result column="approval" property="approval" jdbcType="VARCHAR"/>
+            <result column="projectname" property="projectname" jdbcType="VARCHAR"/>
+            <result column="prnumber" property="prnumber" jdbcType="VARCHAR"/>
+            <result column="worktype" property="worktype" jdbcType="VARCHAR"/>
+            <result column="market" property="market" jdbcType="VARCHAR"/>
+            <result column="othersales" property="othersales" jdbcType="VARCHAR"/>
+            <result column="sellunit" property="sellunit" jdbcType="VARCHAR"/>
+            <result column="othersalesid" property="othersalesid" jdbcType="VARCHAR"/>
+            <result column="department" property="department" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="XCtravelpersonnel"
+                    ofType="com.dtoa.model.XCtravelpersonnel" column="XCtravelpersonnel">
+            <result column="approval" property="approval" jdbcType="VARCHAR"/>
+            <result column="pedestrian" property="pedestrian" jdbcType="VARCHAR"/>
+            <result column="pedestrianid" property="pedestrianid" jdbcType="VARCHAR"/>
+            <result column="trekking" property="trekking" jdbcType="VARCHAR"/>
+            <result column="trekkingid" property="trekkingid" jdbcType="VARCHAR"/>
+            <result column="approvers" property="approvers" jdbcType="VARCHAR"/>
+            <result column="approversid" property="approversid" jdbcType="VARCHAR"/>
+            <result column="renews" property="renews" jdbcType="VARCHAR"/>
+            <result column="renewsid" property="renewsid" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="XCtravelcallbacks"
+                    ofType="com.dtoa.model.XCtravelcallbacks" column="XCtravelcallbacks">
+            <id column="ThirdNo" property="thirdno" jdbcType="VARCHAR"/>
+            <result column="CreateTime" property="createtime" jdbcType="VARCHAR"/>
+            <result column="Event" property="event" jdbcType="VARCHAR"/>
+            <result column="OpenSpStatus" property="openspstatus" jdbcType="VARCHAR"/>
+            <result column="ApplyTime" property="applytime" jdbcType="VARCHAR"/>
+            <result column="ApplyUserName" property="applyusername" jdbcType="VARCHAR"/>
+            <result column="ApplyUserId" property="applyuserid" jdbcType="VARCHAR"/>
+            <result column="ApplyUserParty" property="applyuserparty" jdbcType="VARCHAR"/>
+            <result column="ApplyUserImage" property="applyuserimage" jdbcType="VARCHAR"/>
+            <result column="NodeStatus" property="nodestatus" jdbcType="VARCHAR"/>
+            <result column="ItemName" property="itemname" jdbcType="VARCHAR"/>
+            <result column="ItemUserid" property="itemuserid" jdbcType="VARCHAR"/>
+            <result column="ItemStatus" property="itemstatus" jdbcType="VARCHAR"/>
+            <result column="ItemOpTime" property="itemoptime" jdbcType="VARCHAR"/>
+            <result column="ItemImage" property="itemimage" jdbcType="VARCHAR"/>
+            <result column="NotifyNodes" property="notifynodes" jdbcType="VARCHAR"/>
+            <result column="copyName" property="copyname" jdbcType="VARCHAR"/>
+            <result column="copyUserid" property="copyuserid" jdbcType="VARCHAR"/>
+            <result column="copyImage" property="copyimage" jdbcType="VARCHAR"/>
+            <result column="ItemParty" property="itemparty" jdbcType="VARCHAR"/>
+            <result column="approverstep" property="approverstep" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        approval, departure, arrived,starttime, endtime, duration,unit, reasons,
+        vehicles,applyTime,unitid,company,userid
+    </sql>
+    <select id="sel" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT * FROM
+        XC_travel_travel tt where tt.approval = #{approval,jdbcType=VARCHAR}
+
+    </select>
+
+
+    <select id="querys" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT
+        tt.approval,
+        tt.applyTime,
+        tt.departure,
+        tt.arrived,
+        tt.starttime,
+        tt.endtime,
+        tt.duration,
+        tt.unit,
+        tt.reasons,
+        tt.vehicles,
+        tt.company,
+        tp.projectname,
+        tp.prnumber,
+        tp.worktype,
+        tp.market,
+        tp.othersales,
+        tp.sellunit,
+        tpe.Pedestrian,
+        tpe.Pedestrianid,
+        tpe.trekking,
+        tpe.trekkingid,
+        tpe.approvers,
+        tpe.approversid,
+        tpe.renews,
+        tpe.renewsid
+        FROM
+        XC_travel_travel tt LEFT JOIN XC_travel_project tp on tt.approval=tp.approval
+        LEFT JOIN XC_travel_personnel tpe on tp.approval=tpe.approval
+        LEFT JOIN XC_travel_callbacks tc ON tpe.approval=tc.ThirdNo
+        WHERE tt.approval = #{approval,jdbcType=VARCHAR}
+    </select>
+
+
+    <select id="querytable" resultMap="BaseResultMap" parameterType="com.dtoa.model.XCtraveltravel">
+        SELECT
+        tt.approval,
+        tt.applyTime,
+        tt.departure,
+        tt.arrived,
+        tt.starttime,
+        tt.endtime,
+        tt.duration,
+        tt.unit,
+        tt.reasons,
+        tt.vehicles,
+        tt.userid,
+        tp.projectname,
+        tp.worktype,
+        tp.market,
+        tpe.trekking,
+        tpe.pedestrian,
+        tc.ApplyUserName,
+        tc.ApplyUserImage,
+        tc.OpenSpStatus,
+        tc.ItemName,
+        tc.ItemImage
+
+        FROM
+        XC_travel_travel tt LEFT JOIN XC_travel_project tp on tt.approval=tp.approval
+        LEFT JOIN XC_travel_personnel tpe on tp.approval=tpe.approval
+        LEFT JOIN XC_travel_callbacks tc ON tpe.approval=tc.ThirdNo
+        WHERE tc.ApplyUserId = #{userid,jdbcType=VARCHAR} order by tc.ApplyTime desc
+    </select>
+
+    <select id="queryall" resultMap="BaseResultMap" parameterType="com.dtoa.model.XCtraveltravel">
+        SELECT
+        tt.approval,
+        tt.applyTime,
+        tt.departure,
+        tt.arrived,
+        tt.starttime,
+        tt.endtime,
+        tt.duration,
+        tt.unit,
+        tt.reasons,
+        tt.vehicles,
+        tt.userid,
+        tp.projectname,
+        tp.worktype,
+        tp.market,
+        tpe.trekking,
+        tpe.pedestrian,
+        tc.ApplyUserName,
+        tc.ApplyUserImage,
+        tc.OpenSpStatus,
+        tc.ItemName,
+        tc.ItemImage
+        FROM
+        XC_travel_travel tt LEFT JOIN XC_travel_project tp on tt.approval=tp.approval
+        LEFT JOIN XC_travel_personnel tpe on tp.approval=tpe.approval
+        LEFT JOIN XC_travel_callbacks tc ON tpe.approval=tc.ThirdNo
+        WHERE tc.ThirdNo = #{approval,jdbcType=VARCHAR}
+    </select>
+
+    <select id="query" resultMap="BaseResultMap" parameterType="java.util.List">
+        SELECT
+        tt.approval,
+        tt.applyTime,
+        tt.departure,
+        tt.arrived,
+        tt.starttime,
+        tt.endtime,
+        tt.duration,
+        tt.unit,
+        tt.unitid,
+        tt.reasons,
+        tt.vehicles,
+        tt.company,
+        tp.projectname,
+        tp.prnumber,
+        tp.worktype,
+        tp.market,
+        tp.othersales,
+        tp.sellunit,
+        tpe.Pedestrian,
+        tpe.Pedestrianid,
+        tpe.trekking,
+        tpe.trekkingid,
+        tpe.approvers,
+        tpe.approversid,
+        tpe.renews,
+        tpe.renewsid,
+        tc.CreateTime,
+        tc.OpenSpStatus,
+        tc.NodeStatus
+        FROM
+        XC_travel_travel tt LEFT JOIN XC_travel_project tp on tt.approval=tp.approval
+        LEFT JOIN XC_travel_personnel tpe on tp.approval=tpe.approval
+        LEFT JOIN XC_travel_callbacks tc ON tpe.approval=tc.ThirdNo
+        WHERE
+        tt.approval = #{approval,jdbcType=VARCHAR}
+        and tc.OpenSpStatus = #{OpenSpStatus,jdbcType=VARCHAR}
+        and tc.NodeStatus LIKE #{NodeStatus}
+    </select>
+
+    <delete id="del" parameterType="java.lang.String">
+        delete from XC_travel_travel
+        where approval = #{approval,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.dtoa.model.XCtraveltravel">
+        insert into XC_travel_travel (approval, departure, arrived,
+        starttime, endtime, duration,
+        unit, reasons, vehicles,applyTime,unitid,company,userid
+        )
+        values (#{approval,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, #{arrived,jdbcType=VARCHAR},
+        #{starttime,jdbcType=VARCHAR}, #{endtime,jdbcType=VARCHAR}, #{duration,jdbcType=VARCHAR},
+        #{unit,jdbcType=VARCHAR}, #{reasons,jdbcType=VARCHAR}, #{vehicles,jdbcType=VARCHAR},
+        #{applyTime,jdbcType=VARCHAR}
+        , #{unitid,jdbcType=VARCHAR},#{company,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertaa" parameterType="com.dtoa.model.XCtraveltravel">
+        insert into XC_travel_travel (approval)
+        values (#{approval,jdbcType=VARCHAR} )
+    </insert>
+    <insert id="insertSelective" parameterType="com.dtoa.model.XCtraveltravel">
+        insert into XC_travel_travel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                approval,
+            </if>
+            <if test="departure != null">
+                departure,
+            </if>
+            <if test="arrived != null">
+                arrived,
+            </if>
+            <if test="starttime != null">
+                starttime,
+            </if>
+            <if test="endtime != null">
+                endtime,
+            </if>
+            <if test="duration != null">
+                duration,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="reasons != null">
+                reasons,
+            </if>
+            <if test="vehicles != null">
+                vehicles,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="approval != null">
+                #{approval,jdbcType=VARCHAR},
+            </if>
+            <if test="departure != null">
+                #{departure,jdbcType=VARCHAR},
+            </if>
+            <if test="arrived != null">
+                #{arrived,jdbcType=VARCHAR},
+            </if>
+            <if test="starttime != null">
+                #{starttime,jdbcType=VARCHAR},
+            </if>
+            <if test="endtime != null">
+                #{endtime,jdbcType=VARCHAR},
+            </if>
+            <if test="duration != null">
+                #{duration,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="reasons != null">
+                #{reasons,jdbcType=VARCHAR},
+            </if>
+            <if test="vehicles != null">
+                #{vehicles,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
