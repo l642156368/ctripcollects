@@ -30,5 +30,10 @@ public class XCtemplateServiceImpl implements XCtemplateService {
         return mapper.query( company );
     }
 
+    @Override
+    public int insert(XCtraveltemplate tt) {
+        return mapper.insert( tt );
+    }
+
 
 }

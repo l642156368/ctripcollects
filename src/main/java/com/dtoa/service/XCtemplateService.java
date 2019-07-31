@@ -10,4 +10,6 @@ public interface XCtemplateService {
     XCtraveltemplate queryall(String tempid);
 
     XCtraveltemplate query(String company);
+
+    int insert(XCtraveltemplate tt);
 }

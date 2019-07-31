@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "template")
@@ -103,11 +104,22 @@ public class templateController {
     }
 
     @RequestMapping(value = "query", method = {RequestMethod.POST})
-    private XCtraveltemplate query(String company) {
+    private XCtraveltemplate query(@RequestBody String company) {
+
         XCtraveltemplate aa = service.query( company );
         System.out.println( aa );
         return aa;
     }
 
+    @RequestMapping(value = "insert", method = {RequestMethod.POST})
+    private int insert(XCtraveltemplate tt) {
+        tt.getTempdescribe();
+        tt.getTemplateid();
+        tt.getDepartment();
+        tt.getTempname();
+        tt.setTempid( UUID.randomUUID().toString().replace("-", "") );
+
+        return  service.insert(tt);
+    }
 
 }
