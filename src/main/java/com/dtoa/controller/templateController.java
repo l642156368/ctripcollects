@@ -35,7 +35,14 @@ public class templateController {
         String acompan = company.get( "company" ).toString();
         System.out.println(tte.getTemplateid());
         System.out.println("转换后"+acompan);*/
-
+        if (company != "") {
+            if (company.indexOf( "战略委员会" ) != -1 || company.indexOf( "市场委员会" ) != -1 || company.indexOf( "技术委员会" ) != -1 || company.indexOf( "监察部" ) != -1 || company.indexOf( "投资部" ) != -1 || company.indexOf( "研究院" ) != -1) {
+                String tempid = "5";
+                tte = service.queryall( tempid );
+                System.out.println( tte.getTemplateid() );
+                System.out.println( "禁选虚拟组" );
+            }
+        }
 
         if (company != "" && tte.getTemplateid() == null) {
             int aa = company.indexOf( "待定" );
@@ -55,14 +62,21 @@ public class templateController {
             }
         }
         if (company != "") {
-            if (company.indexOf( "总经办" ) != -1 || company.indexOf( "支持中心" ) != -1 || company.indexOf( "产品事业部" ) != -1) {
+            if (company.indexOf( "东华云计算有限公司/总办/战略委员会" ) != -1 || company.indexOf( "东华云计算有限公司/总办/市场委员会" ) != -1 || company.indexOf( "东华云计算有限公司/总办/技术委员会" ) != -1 || company.indexOf( "东华云计算有限公司/总办/监察部" ) != -1 || company.indexOf( "东华云计算有限公司/总办/投资部" ) != -1 || company.indexOf( "东华云计算有限公司/总办/研究院" ) != -1) {
                 String tempid = "4";
                 tte = service.queryall( tempid );
                 System.out.println( tte.getTemplateid() );
                 System.out.println( "至高" );
             }
         }
-
+        if (company != "") {
+            if (company.indexOf( "东华云计算有限公司/云产/至云/总经办" ) != -1 || company.indexOf( "东华云计算有限公司/云产/至云/支持中心" ) != -1 || company.indexOf( "东华云计算有限公司/云产/至云/产品事业群" ) != -1) {
+                String tempid = "4";
+                tte = service.queryall( tempid );
+                System.out.println( tte.getTemplateid() );
+                System.out.println( "至高" );
+            }
+        }
 
         if (company != "" && tte.getTemplateid() == null) {
             int aa = company.indexOf( "东华云计算有限公司/待定" );
@@ -112,6 +126,10 @@ public class templateController {
     private XCtraveltemplate query(@RequestBody String company) {
 
         XCtraveltemplate aa = service.query( company );
+        if("".equals( aa )){
+            String tempid = "1";
+            aa = service.queryall( tempid );
+        }
         System.out.println( aa );
         return aa;
     }
